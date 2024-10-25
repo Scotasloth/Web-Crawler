@@ -12,6 +12,13 @@ func getLinks(url string) ([]string, error) {
 		return nil, err
 	}
 
+	defer response.Body.Close()
+
+	if response.StatusCode != 200 {
+		return nil, fmt.Errorf("Failed to get URL: %s", url)
+	}
+
+	var links []string
 	return links, nil
 }
 
