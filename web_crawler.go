@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"fmt"      // Importing the fmt package for formatted I/O
 	"io"       // Importing the io package for input/output utilities
 	"log"      // Importing the log package for logging errors
 	"net/http" // Importing the net/http package to make HTTP requests
-	"strings"  // Importing the strings package for string manipulation
+	"os"
+	"strings" // Importing the strings package for string manipulation
 
 	"golang.org/x/net/html" // Importing the HTML parsing package
 )
@@ -77,4 +79,24 @@ func main() {
 	for _, link := range links {
 		fmt.Print(link + " ") // Print each link, separated by a space
 	}
+
+	file, err := os.Create("Links.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer file.Close()
+
+	writer := bufio.NewWriter(file)
+
+	for _, link := range links {
+		_, err := writer.WriteString(link + "\n")
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	writer.Flush()
+
+	fmt.Print("All links have been written to links.txt")
 }
