@@ -1,4 +1,5 @@
 Simple Web Crawler
+
 A simple web crawler built in Go that fetches web pages and extracts links. This project demonstrates basic web scraping techniques and how to navigate HTML content.
 
 Features
