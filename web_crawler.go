@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -19,10 +19,10 @@ func getLinks(url string) ([]string, error) {
 	defer response.Body.Close()
 
 	if response.StatusCode != 200 {
-		return nil, fmt.Errorf("Failed to get URL: %s", url)
+		return nil, fmt.Errorf("failed to get URL: %s", url)
 	}
 
-	body, err := ioutil.ReadAll(response.Body)
+	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func getLinks(url string) ([]string, error) {
 }
 
 func main() {
-	url := "Testsite"
+	url := "Https://Google.co.uk"
 
 	links, err := getLinks(url)
 	if err != nil {
