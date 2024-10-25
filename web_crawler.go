@@ -66,7 +66,14 @@ func getLinks(url string) ([]string, error) {
 
 // main function - entry point of the program
 func main() {
-	url := "https://Google.co.uk" // Define the URL to fetch
+	var url string
+
+	fmt.Print("Please enter a URL: ")
+
+	_, err := fmt.Scan(&url)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Call getLinks and handle any potential errors
 	links, err := getLinks(url)
